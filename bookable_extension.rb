@@ -29,29 +29,12 @@ class BookableExtension < Spree::Extension
       end
       
       #
-      # would like to see this in core. General 
-      # flag for orders that done' need to be shipped.
+      # would like to see this or similar in core. General 
+      # flag for orders that don't need to be shipped.
       #
       def intangible?
         self.all_bookable?
       end
-      
-      #
-      # do not create a shipment if there are no goods to ship
-      #
-      #private
-      #def complete_order
-      #  unless self.intangible? 
-      #    shipments.build(:address => ship_address, :shipping_method => checkout.shipping_method)
-      #  end
-      #  checkout.update_attribute(:completed_at, Time.now)
-      #  InventoryUnit.sell_units(self)
-      #  save_result = save! 
-      #  if email 
-      #    OrderMailer.deliver_confirm(self)
-      #  end     
-      #  save_result
-      #end
       
     end
 
@@ -115,22 +98,6 @@ class BookableExtension < Spree::Extension
         end
         @object         
       end
-      
-      
-      #def object
-      #  return @object if @object
-      #  default_country = Country.find Spree::Config[:default_country_id]
-      #  @object = parent_object.checkout                                                  
-      #  unless params[:checkout] and params[:checkout][:coupon_code]
-      #    # do not create these defaults if we're merely updating coupon code, otherwise we'll have a validation error
-      #    @object.ship_address ||= (parent_object.intangible?) ? nil : Address.new(:country => default_country)
-      #    @object.bill_address ||= Address.new(:country => default_country)   
-      #    @object.creditcard   ||= Creditcard.new(:month => Date.today.month, :year => Date.today.year)
-      #  end
-      #  @object         
-      #end
-      
-      
     end
 
 
