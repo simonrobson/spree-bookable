@@ -1,0 +1,14 @@
+<p>
+  <% attribute = field[:name].gsub(" ", "_").downcase %>
+  <%= f.label attribute, field[:name] %>
+  
+  <% if f.object && f.object.column_for_attribute(attribute).type == :boolean %>
+	<%= f.check_box attribute  %>
+  <% else %>
+  <br />
+  <% val = f.object.send(attribute.to_sym) rescue nil
+	formatted_value = (val.nil? || !field.key?(:format)) ? val : val % field[:format] %>
+  <%= f.text_field attribute, :value => formatted_value %>
+  <% end %>
+  <%= f.error_message_on attribute %>
+</p>
