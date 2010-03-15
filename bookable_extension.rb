@@ -15,9 +15,9 @@ class BookableExtension < Spree::Extension
   def activate
     
     Variant.additional_fields += [
-      {:name => 'Bookable', :only => [:product]},
-      {:name => 'Ask Start Date', :only => [:product]},
-      {:name => 'Ask End Date', :only => [:product]}
+      {:name => 'Bookable', :use => 'check_box', :only => [:product]},
+      {:name => 'Ask Start Date', :use => 'check_box', :only => [:product]},
+      {:name => 'Ask End Date', :use => 'check_box', :only => [:product]}
     ]
     
     # Customise the Order model
