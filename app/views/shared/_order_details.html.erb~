@@ -47,7 +47,7 @@
   </tbody>
   <tbody id='order-total'>
     <tr class="total">
-      <td colspan="3"><b><%= t('order_total') %>:</b></td>
+      <td colspan="3"><b><%= t('order_total') %>:</b>dd</td>
       <td class="total_display"><span id="order_total"><%= number_to_currency @order.total -%></span></td>
     </tr>
   </tbody>
