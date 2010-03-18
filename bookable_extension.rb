@@ -22,7 +22,7 @@ class BookableExtension < Spree::Extension
     
     # Customise the Order model
 
-    Order.class_eval do
+   Order.class_eval do
       def all_bookable?
         return false if self.line_items.empty?
         self.line_items.all?{|li| li.product.bookable?}
@@ -42,8 +42,9 @@ class BookableExtension < Spree::Extension
     # Customise the order controller's creat.after procedure to record
     # start and end dates on the line items for bookable products
 
-    OrdersController.class_eval do
-      create.after do    
+  
+   OrdersController.class_eval do
+        def create_before    
         params[:products].each do |product_id,variant_id|
           quantity = params[:quantity].to_i if !params[:quantity].is_a?(Array)
           quantity = params[:quantity][variant_id].to_i if params[:quantity].is_a?(Array)
@@ -68,6 +69,7 @@ class BookableExtension < Spree::Extension
         # store order token in the session
         session[:order_token] = @order.token
       end
+  
       
       def add_dates_to_variant_line_item(variant, start_date, end_date)
         li = @order.contains?(variant)
@@ -81,24 +83,6 @@ class BookableExtension < Spree::Extension
     # update Checkout controller to 
     # set shipping address to nil if order contains only bookables
     #
-    CheckoutsController.class_eval do
-      private
-      def object
-        return @object if @object
-        @object = parent_object.checkout                                                  
-        unless params[:checkout] and params[:checkout][:coupon_code]
-          # do not create these defaults if we're merely updating coupon code, otherwise we'll have a validation error
-          if user = parent_object.user || current_user
-            @object.shipment.address ||= (parent_object.intangible?) ? nil : user.ship_address 
-            @object.bill_address     ||= user.bill_address
-          end
-          @object.shipment.address ||= (parent_object.intangible?) ? nil : Address.default
-          @object.bill_address     ||= Address.default
-          @object.creditcard       ||= Creditcard.new(:month => Date.today.month, :year => Date.today.year)
-        end
-        @object         
-      end
-    end
 
 
     # Add your extension tab to the admin.
