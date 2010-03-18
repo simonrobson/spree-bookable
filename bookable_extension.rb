@@ -39,7 +39,7 @@ class BookableExtension < Spree::Extension
     end
 
 
-    # Customise the order controller's creat.after procedure to record
+    # Customise the order controller's create.before procedure to record
     # start and end dates on the line items for bookable products
 
   
@@ -79,31 +79,5 @@ class BookableExtension < Spree::Extension
       end
     end
     
-    #
-    # update Checkout controller to 
-    # set shipping address to nil if order contains only bookables
-    #
-
-
-    # Add your extension tab to the admin.
-    # Requires that you have defined an admin controller:
-    # app/controllers/admin/yourextension_controller
-    # and that you mapped your admin in config/routes
-
-    #Admin::BaseController.class_eval do
-    #  before_filter :add_yourextension_tab
-    #
-    #  def add_yourextension_tab
-    #    # add_extension_admin_tab takes an array containing the same arguments expected
-    #    # by the tab helper method:
-    #    #   [ :extension_name, { :label => "Your Extension", :route => "/some/non/standard/route" } ]
-    #    add_extension_admin_tab [ :yourextension ]
-    #  end
-    #end
-
-    # make your helper avaliable in all views
-    # Spree::BaseController.class_eval do
-    #   helper YourHelper
-    # end
   end
 end
