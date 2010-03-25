@@ -1,9 +1,9 @@
 Spree Bookable Extension
 =========
 
-Spree extension to add 'Bookable' products. A bookable product has a user selectable start and/or end date, configurable in the product admin. The extension adds date selectors to the product pages where appropriate, and also summarises the selected dates in the cart and order summary. 
+Spree extension to add 'Bookable' products. A bookable product has a user selectable start and/or end date, configurable in the product admin. The extension adds date selectors to the product pages where appropriate, and also summarises the selected dates in the cart and order summary. The order confirmation email has not been overridden to show the dates.
 
-Confirmed working with Spree 0.9.0
+Updated to work with edge spree as of 2010-03-25 / should be good on 0.10.1.
 
 Installation
 ------------------------
