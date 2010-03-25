@@ -1,0 +1,10 @@
+<% if variant.product.bookable? %>
+<div class="bookable-dates">
+<% if variant.product.ask_start_date? %>
+	<strong>Start Date:</strong> <%=h (line_item.start_date.blank?) ? "not specified" : line_item.start_date %>
+<% end %>
+<% if variant.product.ask_end_date? %>
+	<strong>End Date:</strong> <%=h (line_item.end_date.blank?) ? "not specified" : line_item.end_date %>
+<% end %>
+</div>
+<% end %>

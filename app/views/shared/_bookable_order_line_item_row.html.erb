@@ -1,0 +1,15 @@
+<td width="300"><%=item.variant.product.name-%> <%= "(" + variant_options(item.variant) + ")" unless item.variant .option_values.empty? %>
+<% if item.variant.product.bookable? %>
+<div class="bookable-dates">
+<% if item.variant.product.ask_start_date? %>
+	Start Date: <%=h (item.start_date.blank?) ? "not specified" : item.start_date %>
+<% end %>
+<% if item.variant.product.ask_end_date? %>
+	End Date: <%=h (item.end_date.blank?) ? "not specified" : item.end_date %>
+<% end %>
+</div>
+<% end %>	
+</td>
+<td class="price"><%= number_to_currency item.price -%></td>
+<td class="qty"><%=item.quantity-%></td>
+<td class="total"><span><%= number_to_currency (item.price * item.quantity)-%></span></td>

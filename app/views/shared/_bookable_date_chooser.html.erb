@@ -1,0 +1,25 @@
+<% if @product.bookable? %>
+	<% content_for :head do -%>
+		<%= javascript_include_tag 'jquery-ui-1.7.2.custom.min.js' %>
+		<%= stylesheet_link_tag 'ui-lightness/jquery-ui-1.7.2.custom.css' %>
+		<script type="text/javascript">
+			$(function() {
+				$(".date-picker-field").datepicker({ dateFormat: 'dd-mm-yy',
+											showOn: 'button',
+											buttonImage: '/images/calendar.gif',
+											buttonImageOnly: true
+											});
+			});
+			</script>
+  <% end -%>
+	<div class="bookable-date-pickers">
+	<% if @product.ask_start_date? %>
+		<label name="start_date">Preferred Start Date:</label><br/>
+		<%= text_field_tag "start_date", {}, {:class => 'date-picker-field'} %><br/>
+	<% end %>
+	<% if @product.ask_end_date? %>
+		<label name="end_date">End Date:</label><br/>
+		<%= text_field_tag "end_date", {}, {:class => 'date-picker-field'} %><br/>
+	<% end %>
+	</div>
+<% end %>
